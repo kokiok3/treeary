@@ -1,0 +1,15 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    /* 기본 모바일 */
+    width: 100%;
+}
+
+@media (min-width: 1281px) {
+    .container {
+        flex-direction: row;
+        /* PC 환경 */
+        max-width: 1440px;
+        margin: 0 auto;
+    }
+}

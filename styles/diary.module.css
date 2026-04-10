@@ -1,0 +1,22 @@
+.header {
+    display: flex;
+    justify-content: space-between;
+
+    .date_wrapper {
+        display: flex;
+        align-items: center;
+        gap: var(--space-base);
+
+        & .text {
+            font-weight: var(--weight-sb);
+        }
+    }
+}
+
+.card_wrapper {
+    display: grid;
+    /* grid-template-columns: repeat(auto-fit, minmax(106px, 1fr)); */
+    grid-template-columns: repeat(auto-fit, 106px);
+    gap: var(--space-base);
+    margin-top: var(--space-base);
+}

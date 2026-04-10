@@ -1,0 +1,51 @@
+.card {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    width: 106px;
+    height: 145px;
+    padding: var(--space-md);
+    background-color: var(--green3);
+    border-radius: var(--radius-sm);
+
+    .date_wrapper {
+        display: flex;
+        flex-direction: column;
+        gap: var(--space-2xs);
+        color: var(--brown1);
+        font-weight: var(--weight-bd);
+        font-size: 20px;
+
+        .day {
+            font-size: 12px;
+        }
+    }
+
+    .icon {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        margin-top: var(--space-sm);
+        color: var(--brown2);
+    }
+
+    &.active {
+        background-color: var(--green5);
+
+        .date_wrapper {
+            color: var(--brown3);
+        }
+
+        .preview {
+            flex-grow: 1;
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            margin-right: -10px;
+            color: var(--white);
+            font-size: 32px;
+            font-weight: var(--weight-sd);
+        }
+    }
+}

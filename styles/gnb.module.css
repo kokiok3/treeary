@@ -1,0 +1,28 @@
+.gnb {
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: flex;
+    align-items: center;
+    width: stretch;
+    height: 55px;
+    padding: 0 10px;
+
+    .title {
+        position: absolute;
+        left: 50%;
+        transform: translateX(-50%);
+        font-weight: var(--weight-sb);
+    }
+}
+
+/* --- 모바일 & 태블릿 전용 (≤ 1280px) --- */
+@media (max-width: 1280px) {
+    .gnb .title {
+        /* font-size: 12px; */
+    }
+}
+
+/* --- PC 전용 (> 1280px) --- */
+@media (min-width: 1281px) {
+}
