@@ -1,5 +1,4 @@
-import IconChevronLeft from "@/assets/svg/icon-chevron-left";
-import IconChevronRight from "@/assets/svg/icon-chevron-right";
+import { IconChevronLeft, IconChevronRight } from "@/assets/svg/index";
 import Switch from "@/components/common/switch";
 import Icon from "@/components/common/icon";
 import DiaryStyles from "@/styles/diary.module.css";

@@ -1,4 +1,4 @@
-import IconPlus from "@/assets/svg/icon-plus";
+import { IconPlus } from "@/assets/svg/index";
 import Icon from "@/components/common/icon";
 import DiaryCardStyles from "@/styles/diary-card.module.css";
 

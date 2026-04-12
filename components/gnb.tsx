@@ -1,7 +1,7 @@
 "use client";
 import GnbStyles from "@/styles/gnb.module.css";
 import Icon from "@/components/common/icon";
-import IconMenu from "@/assets/svg/icon-menu";
+import { IconMenu } from "@/assets/svg/index";
 import { useParams, usePathname } from "next/navigation";
 
 export default function Gnb({ back }: { back?: boolean }) {

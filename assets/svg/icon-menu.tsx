@@ -1,4 +1,4 @@
-export default function IconMenu(props: any) {
+export function IconMenu(props: any) {
     return (
         <svg
             xmlns="http://www.w3.org/2000/svg"

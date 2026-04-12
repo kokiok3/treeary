@@ -1,4 +1,4 @@
-export default function IconChevronRight(props: any) {
+export function IconChevronRight(props: any) {
     return (
         <svg
             xmlns="http://www.w3.org/2000/svg"
