@@ -36,6 +36,8 @@
     --space-lg: 22px;
     --space-xl: 40px;
 
+    --height-header: 55px;
+
     /* Font Weight */
     --weight-base: 400;
     --weight-md: 500;
@@ -56,6 +58,11 @@
     --foreground: #ededed;
   }
 } */
+
+html {
+    /* 스크롤바가 사라져도 여백을 유지하여 화면 밀림 방지 */
+    scrollbar-gutter: stable;
+}
 
 body {
     margin: 0;

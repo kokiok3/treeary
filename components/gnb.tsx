@@ -4,12 +4,11 @@ import Icon from "@/components/common/icon";
 import { IconMenu } from "@/assets/svg/index";
 import { useParams, usePathname } from "next/navigation";
 
-export default function Gnb({ back }: { back?: boolean }) {
+export default function Gnb({ onNavClick, back }: { onNavClick: () => void; back?: boolean }) {
     const params = useParams();
     const pathname = usePathname();
 
     const getTitle = () => {
-        console.log(pathname, params);
         if (params.id) {
             return;
         }
@@ -20,7 +19,7 @@ export default function Gnb({ back }: { back?: boolean }) {
 
     return (
         <header className={GnbStyles.gnb}>
-            <Icon size={20}>
+            <Icon size={20} isButton onClick={onNavClick}>
                 <IconMenu />
             </Icon>
             <h1 className={GnbStyles.title}>{getTitle()}</h1>

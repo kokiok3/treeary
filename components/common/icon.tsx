@@ -6,6 +6,7 @@ interface IconProps<T = any> {
     disabled?: boolean;
     isButton?: boolean;
     className?: string;
+    onClick?: () => void;
 }
 
 export default function Icon(props: IconProps) {
@@ -18,7 +19,9 @@ export default function Icon(props: IconProps) {
     });
 
     return props.isButton ? (
-        <button className={`w-fit ${props.className ?? ""}`.trim()}>{styledChild}</button>
+        <button className={`w-fit ${props.className ?? ""}`.trim()} onClick={props.onClick}>
+            {styledChild}
+        </button>
     ) : (
         <div className={`w-fit ${props.className ?? ""}`.trim()}>{styledChild}</div>
     );
