@@ -1,0 +1,18 @@
+.button {
+    display: block;
+    height: 38px;
+    padding: 0 var(--space-base);
+    background-color: var(--emerald1);
+    border-radius: var(--radius-base);
+    color: var(--white);
+    font-weight: var(--weight-md);
+    text-align: center;
+
+    &:hover {
+        background-color: var(--emerald2);
+    }
+
+    &:focus {
+        background-color: var(--emerald3);
+    }
+}

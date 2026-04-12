@@ -1,10 +1,10 @@
 import { Switch as radixSwitch } from "radix-ui";
-import "@/styles/switch.css";
+import SwitchStyles from "@/styles/switch.module.css";
 
 export default function Switch() {
     return (
-        <radixSwitch.Root className="SwitchRoot" id="airplane-mode">
-            <radixSwitch.Thumb className="SwitchThumb" />
+        <radixSwitch.Root className={SwitchStyles.switch_root} id="airplane-mode">
+            <radixSwitch.Thumb className={SwitchStyles.switch_thumb} />
         </radixSwitch.Root>
     );
 }
