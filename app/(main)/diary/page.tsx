@@ -1,11 +1,19 @@
+"use client";
 import IconChevronLeft from "@/assets/svg/icon-chevron-left";
 import IconChevronRight from "@/assets/svg/icon-chevron-right";
 import Switch from "@/components/common/switch";
 import Icon from "@/components/common/icon";
 import DiaryStyles from "@/styles/diary.module.css";
 import DiaryCard from "@/components/diary/diary-card";
+import { useHeader } from "@/components/gnb-context";
+import { useEffect } from "react";
 
 export default function Diary() {
+    const { setTitle } = useHeader();
+    useEffect(() => {
+        setTitle("다이어리");
+    }, []);
+
     return (
         <section className="section">
             {/* 헤더 */}
