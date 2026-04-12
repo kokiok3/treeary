@@ -1,4 +1,3 @@
-"use client";
 import IconChevronLeft from "@/assets/svg/icon-chevron-left";
 import IconChevronRight from "@/assets/svg/icon-chevron-right";
 import Switch from "@/components/common/switch";
