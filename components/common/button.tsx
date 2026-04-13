@@ -2,9 +2,38 @@ import ButtonStyles from "@/styles/button.module.css";
 import { ReactElement } from "react";
 
 interface ButtonProps {
-    children: ReactElement | string;
+    children?: ReactElement | string;
+    size?: "sm" | "md" | "lg";
+    type?: "filled" | "outlined";
 }
 
 export default function Button(props: ButtonProps) {
-    return <button className={ButtonStyles.button}>{props.children}</button>;
+    const setButtonSize = () => {
+        switch (props.size) {
+            case "sm":
+                return ButtonStyles.sm;
+            case "md":
+                return ButtonStyles.md;
+            // case "lg":
+            //     return ButtonStyles.lg;
+            default:
+                return ButtonStyles.sm;
+        }
+    };
+    const setButtonType = () => {
+        switch (props.type) {
+            case "filled":
+                return ButtonStyles.filled;
+            case "outlined":
+                return ButtonStyles.outlined;
+            default:
+                return ButtonStyles.filled;
+        }
+    };
+
+    return (
+        <button className={`${ButtonStyles.button} ${setButtonSize()} ${setButtonType()}`}>
+            {props.children}
+        </button>
+    );
 }

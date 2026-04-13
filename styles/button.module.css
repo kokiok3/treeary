@@ -1,5 +1,6 @@
 .button {
     display: block;
+    width: inherit;
     height: 38px;
     padding: 0 var(--space-base);
     background-color: var(--emerald1);
@@ -8,11 +9,30 @@
     font-weight: var(--weight-md);
     text-align: center;
 
+    &.md {
+        height: 47px;
+        border-radius: var(--radius-md);
+    }
+
     &:hover {
         background-color: var(--emerald2);
     }
 
     &:focus {
         background-color: var(--emerald3);
+    }
+
+    &.outlined {
+        background-color: var(--white);
+        border: 1px solid var(--green5);
+        color: var(--foreground);
+
+        &:hover {
+            background-color: var(--green3);
+        }
+
+        &:focus {
+            background-color: var(--green4);
+        }
     }
 }
