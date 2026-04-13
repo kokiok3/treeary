@@ -12,6 +12,11 @@
     background-color: var(--green2);
     font-weight: var(--weight-sb);
 
+    ul {
+        display: flex;
+        flex-direction: column;
+        gap: var(--space-md);
+    }
     li a {
         display: flex;
         align-items: center;
