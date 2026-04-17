@@ -5,6 +5,7 @@ interface ButtonProps {
     children?: ReactElement | string;
     size?: "sm" | "md" | "lg";
     type?: "filled" | "outlined";
+    onClick?: () => void;
 }
 
 export default function Button(props: ButtonProps) {
@@ -32,7 +33,10 @@ export default function Button(props: ButtonProps) {
     };
 
     return (
-        <button className={`${ButtonStyles.button} ${setButtonSize()} ${setButtonType()}`}>
+        <button
+            className={`${ButtonStyles.button} ${setButtonSize()} ${setButtonType()}`}
+            onClick={props.onClick}
+        >
             {props.children}
         </button>
     );

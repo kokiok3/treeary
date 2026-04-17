@@ -1,9 +1,18 @@
+"use client";
 import Logo from "@/assets/images/logo.png";
 import Button from "@/components/common/button";
 import Image from "next/image";
 import LoginStyles from "@/styles/login.module.css";
+import { signIn, useSession } from "next-auth/react";
 
 export default function Auth() {
+export default function Login() {
+    const { data: session } = useSession();
+    console.log(session);
+
+    const handleGoogleLogin = () => {
+        signIn();
+    };
     return (
         <div className={LoginStyles.login}>
             <div className={LoginStyles.logo_area}>
@@ -14,13 +23,13 @@ export default function Auth() {
             </div>
 
             <div className={LoginStyles.button_wrapper}>
-                <Button size="md" type="outlined">
+                {/* <Button size="md" type="outlined">
                     카카오톡으로 시작하기
                 </Button>
                 <Button size="md" type="outlined">
                     네이버로 시작하기
-                </Button>
-                <Button size="md" type="outlined">
+                </Button> */}
+                <Button size="md" type="outlined" onClick={handleGoogleLogin}>
                     Google로 시작하기
                 </Button>
             </div>

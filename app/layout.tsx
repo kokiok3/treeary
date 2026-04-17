@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "@/styles/globals.css";
+import AuthContext from "@/components/auth-context";
 
 const pretendard = localFont({
     src: "../public/font/PretendardVariable.woff2",
@@ -26,7 +27,9 @@ export default function RootLayout({
 }>) {
     return (
         <html lang="en" className={pretendard.variable} suppressHydrationWarning>
-            <body suppressHydrationWarning>{children}</body>
+            <body suppressHydrationWarning>
+                <AuthContext>{children}</AuthContext>
+            </body>
         </html>
     );
 }
