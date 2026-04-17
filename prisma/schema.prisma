@@ -1,0 +1,66 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Get a free hosted Postgres database in seconds: `npx create-db`
+
+generator client {
+  provider = "prisma-client"
+  output   = "../prisma/generated"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+// 1. 유저 테이블
+model User {
+  id           String     @id @default(cuid()) // 고유 ID (CUID 권장)
+  email        String     @unique
+  nickname     String
+  targetLang   String     @default("en")      // 학습 목표 언어
+  createdAt    DateTime   @default(now())
+  updatedAt    DateTime?   @updatedAt
+  deletedAt    DateTime?   // 삭제되지 않았으면 null, 삭제되면 삭제 시각 저장
+  diaries      Diary[]    // 1:N 관계 (일기)
+  aiConfigs    AiConfig[] // 1:N 관계 (AI 키)
+}
+
+// 2. AI 설정 테이블 (키 값 관리)
+model AiConfig {
+  id           String   @id @default(cuid())
+  userId       String
+  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  aiType       String   // 예: "OPENAI", "CLAUDE"
+  apiKey       String   // 암호화된 상태로 저장 권장
+  isActive     Boolean  @default(true)
+  createdAt    DateTime @default(now())
+  deletedAt DateTime?
+}
+
+// 3. 일기 테이블
+model Diary {
+  id           String   @id @default(cuid())
+  title        String?  // GNB에 띄울 타이틀
+  userId       String
+  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+  chats        Chat[]   // 1:N 관계 (채팅 내역)
+
+  @@index([userId, createdAt]) // 조회 최적화를 위한 복합 인덱스
+}
+
+// 4. 채팅 내역 테이블
+model Chat {
+  id        String   @id @default(cuid())
+  diaryId   String
+  diary     Diary    @relation(fields: [diaryId], references: [id], onDelete: Cascade)
+  role      Role     @default(USER) // enum 사용 권장
+  content   String   @db.Text       // 긴 텍스트 대응
+  createdAt DateTime @default(now())
+}
+
+enum Role {
+  USER
+  AI
+}
