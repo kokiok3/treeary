@@ -1,0 +1,3 @@
+-- AlterTable
+ALTER TABLE "User" ALTER COLUMN "nickname" DROP NOT NULL,
+ALTER COLUMN "targetLang" DROP NOT NULL;

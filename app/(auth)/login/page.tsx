@@ -5,13 +5,16 @@ import Image from "next/image";
 import LoginStyles from "@/styles/login.module.css";
 import { signIn, useSession } from "next-auth/react";
 
-export default function Auth() {
 export default function Login() {
     const { data: session } = useSession();
-    console.log(session);
+    console.log("session", session);
 
     const handleGoogleLogin = () => {
-        signIn();
+        signIn("google", { callbackUrl: "/" });
+    };
+    const handleLoginOut = () => {
+        signOut();
+    };
     };
     return (
         <div className={LoginStyles.login}>
@@ -31,6 +34,9 @@ export default function Login() {
                 </Button> */}
                 <Button size="md" type="outlined" onClick={handleGoogleLogin}>
                     Google로 시작하기
+                </Button>
+                <Button size="md" type="outlined" onClick={handleLoginOut}>
+                    로그아웃
                 </Button>
             </div>
         </div>

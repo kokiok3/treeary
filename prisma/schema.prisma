@@ -12,18 +12,75 @@ datasource db {
   provider = "postgresql"
 }
 
-// 1. 유저 테이블
+// NextAuth 연동을 위한 DB
 model User {
-  id           String     @id @default(cuid()) // 고유 ID (CUID 권장)
-  email        String     @unique
-  nickname     String
-  targetLang   String     @default("en")      // 학습 목표 언어
-  createdAt    DateTime   @default(now())
-  updatedAt    DateTime?   @updatedAt
+  id            String    @id @default(cuid())
+  name          String?
+  email         String    @unique
+  emailVerified DateTime?
+  image         String?
+  accounts      Account[]
+  sessions      Session[]
+  Authenticator Authenticator[]
+  // 아래는 트리어리 앱을 위한 컬럼
+  nickname     String?
+  targetLang   String?     @default("en")      // 학습 목표 언어
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
   deletedAt    DateTime?   // 삭제되지 않았으면 null, 삭제되면 삭제 시각 저장
   diaries      Diary[]    // 1:N 관계 (일기)
   aiConfigs    AiConfig[] // 1:N 관계 (AI 키)
 }
+
+model Account {
+  userId            String
+  type              String
+  provider          String
+  providerAccountId String
+  refresh_token     String?
+  access_token      String?
+  expires_at        Int?
+  token_type        String?
+  scope             String?
+  id_token          String?
+  session_state     String?
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@id([provider, providerAccountId])
+}
+
+model Session {
+  sessionToken String   @unique
+  userId       String
+  expires      DateTime
+  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model VerificationToken {
+  identifier String
+  token      String   @unique
+  expires    DateTime
+
+  @@id([identifier, token])
+}
+
+model Authenticator {
+  credentialID         String  @unique
+  userId               String
+  providerAccountId    String
+  credentialPublicKey  String
+  counter              Int
+  credentialDeviceType String
+  credentialBackedUp   Boolean
+  transports           String?
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@id([userId, credentialID])
+}
+// NextAuth 연동을 위한 DB
+
 
 // 2. AI 설정 테이블 (키 값 관리)
 model AiConfig {
