@@ -9,7 +9,7 @@ if (dev) {
     dotenv.config({ path: ".env.local" });
 }
 
-const handler = NextAuth({
+const authOptions = {
     adapter: PrismaAdapter(prisma),
     providers: [
         GoogleProvider({
@@ -21,6 +21,7 @@ const handler = NextAuth({
     //   pages: {
     //     signIn: "/login",
     //   },
-});
+};
+const handler = NextAuth(authOptions);
 
-export { handler as GET, handler as POST };
+export { authOptions, handler as GET, handler as POST };
