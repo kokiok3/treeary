@@ -3,6 +3,7 @@
 import { authOptions } from "@/app/api/auth/[...nextauth]/route";
 import prisma from "@/prisma/prisma";
 import { getServerSession } from "next-auth";
+import { GoogleGenAI } from "@google/genai";
 
 export async function findAiConfigs() {
     return await prisma.aiConfig.findMany();
@@ -30,4 +31,11 @@ export async function createAiConfig(aiKey: string) {
             apiKey: aiKey
         }
     });
+}
+
+export async function fetchGeminiModel() {
+    const ai = new GoogleGenAI({ apiKey: process.env.GOOGLE_AI_API_KEY });
+    const aiList = await ai.models.list();
+
+    return aiList.page;
 }

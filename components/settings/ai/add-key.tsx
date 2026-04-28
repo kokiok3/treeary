@@ -2,11 +2,22 @@
 
 import Button from "@/components/common/button";
 import Input from "@/components/common/input";
-import { createAiConfig } from "@/app/(main)/settings/ai/actions";
+import { CreateAiConfig, createAiConfig, fetchGeminiModel } from "@/app/(main)/settings/ai/actions";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
+import Select, { SelectItem } from "@/components/common/select";
+import { Model } from "@google/genai";
 
 export default function AddKey() {
+    const [models, setModels] = useState<Model[]>([]);
+    useEffect(() => {
+        const model = async () => {
+            const result = await fetchGeminiModel();
+            setModels(result);
+        };
+        model();
+    }, []);
+
     const router = useRouter();
 
     const [aiKey, setAiKey] = useState("");
@@ -49,6 +60,17 @@ export default function AddKey() {
                 value={aiKey}
                 onChange={(e) => setAiKey(e.target.value)}
             ></Input>
+                {/* <Select placeholder="모델">
+                    {models.map((e) => {
+                        if (e.name && e.displayName) {
+                            return (
+                                <SelectItem value={e.name} key={e.name}>
+                                    {e.displayName}
+                                </SelectItem>
+                            );
+                        }
+                    })}
+                </Select> */}
             {validateAiKey && (
                 <span className="text-red-600 text-[12px]">AI Key를 입력해 주세요.</span>
             )}
