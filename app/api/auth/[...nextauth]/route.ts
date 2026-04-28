@@ -2,7 +2,7 @@ import dotenv from "dotenv"; // 또는 import 'dotenv/config';
 import NextAuth from "next-auth/next";
 import GoogleProvider from "next-auth/providers/google";
 import { PrismaAdapter } from "@next-auth/prisma-adapter";
-import prisma from "@/lib/prisma";
+import prisma from "@/prisma/prisma";
 
 const dev = process.env.NODE_ENV !== "production";
 if (dev) {
