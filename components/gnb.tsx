@@ -14,7 +14,7 @@ export default function Gnb({ onNavClick, back }: { onNavClick: () => void; back
         }
 
         if (pathname === "/diary") return "다이어리";
-        if (pathname === "/settings/ai") return "API AI Key";
+        if (pathname === "/settings/ai") return "AI API Key";
     };
 
     return (

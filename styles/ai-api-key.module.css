@@ -1,0 +1,21 @@
+.card {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-md);
+    padding: 20px 10px;
+    background-color: var(--white);
+    border: 1px solid var(--gray2);
+    border-radius: var(--radius-base);
+
+    .row {
+        display: flex;
+        justify-content: space-between;
+    }
+    .title {
+        color: var(--gray3);
+        font-size: 12px;
+    }
+    .btn_delete {
+        color: var(--emerald1);
+    }
+}
