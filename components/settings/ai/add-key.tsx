@@ -9,6 +9,8 @@ import Select, { SelectItem } from "@/components/common/select";
 import { Model } from "@google/genai";
 
 export default function AddKey() {
+    const [type, setType] = useState("gemini");
+
     const [models, setModels] = useState<Model[]>([]);
     useEffect(() => {
         const model = async () => {
@@ -33,7 +35,7 @@ export default function AddKey() {
     AiConfig 테이블에 저장이 됨. */
     const handleAddAiKey = async () => {
         // 입력란 유효성 체크
-        if (!aiKey) {
+        if (!type || !aiKey) {
             setValidateAiKey(true);
             return;
         }
@@ -43,23 +45,25 @@ export default function AddKey() {
         // todo: aiKey 암호화
 
         // db에 aiKey 저장
-        const response = await createAiConfig(aiKey);
+        const params: CreateAiConfig = {
+            aiType: "gemini",
+            aiKey: aiKey
+        };
+        const response = await createAiConfig(params);
 
         // 입력값 초기화
         setAiKey("");
 
         // 화면 재렌더
         router.refresh();
-        console.log("createAiConfig: ", response, aiKey);
     };
 
     return (
         <div className="flex flex-col gap-[10px]">
-            <Input
-                placeholder="API Key 입력"
-                value={aiKey}
-                onChange={(e) => setAiKey(e.target.value)}
-            ></Input>
+            <div className="flex gap-[10px]">
+                <Select placeholder="AI" value={type} onValueChange={setType}>
+                    <SelectItem value="gemini">Gemini</SelectItem>
+                </Select>
                 {/* <Select placeholder="모델">
                     {models.map((e) => {
                         if (e.name && e.displayName) {
@@ -71,9 +75,17 @@ export default function AddKey() {
                         }
                     })}
                 </Select> */}
+                <Input
+                    placeholder="API Key 입력"
+                    value={aiKey}
+                    onChange={(e) => setAiKey(e.target.value)}
+                ></Input>
+            </div>
+
             {validateAiKey && (
                 <span className="text-red-600 text-[12px]">AI Key를 입력해 주세요.</span>
             )}
+
             <Button onClick={handleAddAiKey}>등록</Button>
         </div>
     );
